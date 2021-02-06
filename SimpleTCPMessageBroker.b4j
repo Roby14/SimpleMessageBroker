@@ -1,0 +1,33 @@
+﻿AppType=StandardJava
+Build1=Default,b4j.example
+Group=Default Group
+Library1=jcore
+Library2=jnetwork
+Library3=jrandomaccessfile
+Module1=Client
+Module2=Room
+Module3=RoomAPI
+Module4=Server
+Module5=Vars
+NumberOfFiles=0
+NumberOfLibraries=3
+NumberOfModules=5
+Version=8.8
+@EndOfDesignText@
+'Non-UI application (console / server application)
+#Region Project Attributes 
+	#CommandLineArgs:
+	#MergeLibraries: True 
+#End Region
+
+Sub Process_Globals
+	Type RoomStruct(RoomName As String)
+	
+	Private MsgBroker As Server
+End Sub
+
+Sub AppStart (Args() As String)
+	MsgBroker.Initialize
+	StartMessageLoop
+End Sub
+
