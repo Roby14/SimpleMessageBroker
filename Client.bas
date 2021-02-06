@@ -42,13 +42,21 @@ End Sub
 Private Sub async_NewData (Buffer() As Byte)
 	Dim buffstr As String = BytesToString(Buffer,0,Buffer.Length,"UTF-8")
 	If buffstr.Contains("/roomlist") Then
-		
+		Dim roomlist As StringBuilder
+		roomlist.Initialize
+		For Each str As String In Main.RoomBridge.Roomlist
+			roomlist.Append(str).Append(" ")
+		Next
+		BroadcastMessage(roomlist.ToString.SubString2(0,roomlist.ToString.Length-1))
 	Else If buffstr.Contains("/createroom") Then
-		
+		Dim Split() As String = Regex.Split(" ",buffstr)
+		Main.RoomBridge.CreateRoom(Split(1))
 	Else if buffstr.Contains("/join") Then
-		
+		Dim Split() As String = Regex.Split(" ",buffstr)
+		Main.RoomBridge.JoinRoom(Me,Split(1))
 	Else If buffstr.Contains("/message") Then
-		
+		Dim message As String = buffstr.SubString(9)
+		Main.RoomBridge.SentMessage(getClientRemoteAddress,message)
 	End If
 End Sub
 
